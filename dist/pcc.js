@@ -105,12 +105,131 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-class A {
+/* harmony import */ var _lib_core_PromiseCacheController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/core/PromiseCacheController */ "./lib/core/PromiseCacheController.ts");
+
+/* harmony default export */ __webpack_exports__["default"] = (_lib_core_PromiseCacheController__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
+/***/ "./lib/adapters/LocalStorageCacheAdapter.ts":
+/*!**************************************************!*\
+  !*** ./lib/adapters/LocalStorageCacheAdapter.ts ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var LocalStorageCacheAdapter = /** @class */ (function () {
+    function LocalStorageCacheAdapter() {
+    }
+    LocalStorageCacheAdapter.prototype.clear = function () {
+        localStorage.clear();
+    };
+    LocalStorageCacheAdapter.prototype.getCache = function (key) {
+        return new Promise(function (resolve) {
+            resolve(localStorage.getItem(key));
+        });
+    };
+    LocalStorageCacheAdapter.prototype.getItem = function (key) {
+        return localStorage.getItem(key);
+    };
+    LocalStorageCacheAdapter.prototype.key = function (index) {
+        return localStorage.key(index);
+    };
+    LocalStorageCacheAdapter.prototype.removeItem = function (key) {
+        localStorage.removeItem(key);
+    };
+    LocalStorageCacheAdapter.prototype.setCache = function (key, value) {
+        localStorage.setItem(key, value);
+    };
+    LocalStorageCacheAdapter.prototype.setItem = function (key, value) {
+        this.setCache(key, value);
+    };
+    LocalStorageCacheAdapter.prototype.support = function () {
+        return window.localStorage && Storage && window.localStorage instanceof Storage;
+    };
+    return LocalStorageCacheAdapter;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (LocalStorageCacheAdapter);
+
+
+/***/ }),
+
+/***/ "./lib/adapters/RAMCacheAdapter.ts":
+/*!*****************************************!*\
+  !*** ./lib/adapters/RAMCacheAdapter.ts ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var RAMCacheAdapter = /** @class */ (function () {
+    function RAMCacheAdapter() {
+    }
+    RAMCacheAdapter.prototype.clear = function () {
+        this.cache = {};
+    };
+    RAMCacheAdapter.prototype.getCache = function (key) {
+        var _this = this;
+        // @ts-ignore
+        return new Promise(function getTheCache(resolve) {
+            resolve(_this.cache[key]);
+        });
+    };
+    RAMCacheAdapter.prototype.getItem = function (key) {
+        return this.cache[key];
+    };
+    RAMCacheAdapter.prototype.key = function (index) {
+        throw new Error("function RAMCacheAdapter.ts.key(index: number) not supported");
+    };
+    RAMCacheAdapter.prototype.removeItem = function (key) {
+        delete this.cache[key];
+    };
+    RAMCacheAdapter.prototype.setCache = function (key, value) {
+        this.cache[key] = value;
+    };
+    RAMCacheAdapter.prototype.setItem = function (key, value) {
+        this.setCache(key, value);
+    };
+    RAMCacheAdapter.prototype.support = function () {
+        return true;
+    };
+    return RAMCacheAdapter;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (RAMCacheAdapter);
+
+
+/***/ }),
+
+/***/ "./lib/core/PromiseCacheController.ts":
+/*!********************************************!*\
+  !*** ./lib/core/PromiseCacheController.ts ***!
+  \********************************************/
+/*! exports provided: LocalStorageCacheController, RAMCacheController, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocalStorageCacheController", function() { return LocalStorageCacheController; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RAMCacheController", function() { return RAMCacheController; });
+/* harmony import */ var _adapters_LocalStorageCacheAdapter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../adapters/LocalStorageCacheAdapter */ "./lib/adapters/LocalStorageCacheAdapter.ts");
+/* harmony import */ var _adapters_RAMCacheAdapter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../adapters/RAMCacheAdapter */ "./lib/adapters/RAMCacheAdapter.ts");
+
+// ⭐ 很坑的一点，IDEA创建文件 xx.ts import没有问题，但是创建 TypeScript 类型的 xx文件 import的时候找不到
+
+var LocalStorageCacheController = new _adapters_LocalStorageCacheAdapter__WEBPACK_IMPORTED_MODULE_0__["default"]();
+var RAMCacheController = new _adapters_RAMCacheAdapter__WEBPACK_IMPORTED_MODULE_1__["default"]();
+var CacheController = LocalStorageCacheController;
+if (!CacheController.support()) {
+    CacheController = RAMCacheController;
 }
-let b = new A();
-b.name = "Mission";
-b.age = 100;
-/* harmony default export */ __webpack_exports__["default"] = (b);
+// export 多个普通对象要写在一起
+
+// 可以独立export default
+/* harmony default export */ __webpack_exports__["default"] = (CacheController);
 
 
 /***/ })

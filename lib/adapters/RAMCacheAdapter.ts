@@ -24,7 +24,7 @@ export default class RAMCacheAdapter implements CacheAdapter{
     }
 
     key(index: number): string | null {
-        throw new Error("function RAMCacheAdapter.key(index: number) not supported");
+        throw new Error("function RAMCacheAdapter.ts.key(index: number) not supported");
     }
 
     removeItem(key: string): void {
