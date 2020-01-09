@@ -1,5 +1,7 @@
 # Promise Cache Controller
 
+开发中 2020-01-09
+
 扩展了Promise返回的前端缓存控制器（支持同步访问操作），目前支持基于LocalStorage，SessionStorage,RAM作为底层存储组件
 
 主要用于配合Axios实现可配置的自动前端缓存，用法见于我fork的axios 分支： git@github.com:MissionLee/axios.git
