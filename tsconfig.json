@@ -1,27 +1,36 @@
 {
+  // 完整的配置说明，参考 learn/tsconfig.readme.json
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     // 工作根目录
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "module": "es2015",
+    "outDir": "./lib",
+    //    "sourceMap": true,
+//    "declaration": true,
+    // module  es2015/commonjs  将代码按照指定的规范进行编译,这里用于选择编译代码的组件
+    // 要注意的点是， 这里没有ES5. 我们写 es2015
+    "module": "commonjs",
+    "esModuleInterop": true,
+    //  /* 允许编译生成文件时，在代码中注入工具类(__importDefault、__importStar)对ESM与commonjs混用情况做兼容处理*/
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
+    // "allowSyntheticDefaultImports":false,
+    //    "emitDecoratorMetadata": true,
+    //    "experimentalDecorators": true,
+    //    "importHelpers": true,
+    // 编译结果的 版本 从 ES3 开始都可选,看你怎么用
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"
     ],
+    // 编译时候用到的库，有es的，也有 DOM ， WebWorker之类的
     "lib": [
       "es2015",
       "es5",
       "dom"
     ]
   },
+  // 配置文件里面指定了，就从这个编译，如果没指定，系统自动遍历
   "files": [
-    "index.ts"
+    "./src/core/PromiseCacheController.ts"
   ]
 }

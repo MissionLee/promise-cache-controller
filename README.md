@@ -8,6 +8,5 @@
 
 # 功能/特性
 - 注意：独立使用的时候除了RAMCacheController，其他没有太大价值，作者开发这个组件主要为将其作为Axios的一个Interceptor，通过简单配置，可以进行自动数据缓存
-- 服务于 JSON数据
-- 提供同步的缓存存取功能
-- 提供Promise访问存储功能：用于配合如 axios 这样的基于Promise的前端ajax组件
+- 基本实现了Storage （），部分情况的 key(index) , 还有下标存取未实现
+- 提供Promise访问存储功能：用于配合如 axios 这样的基于Promise的前端ajax组件，实现缓存和请求返回值相同（自动缓存，而无需额外代码处理）

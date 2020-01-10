@@ -36,6 +36,7 @@ export default class LocalStorageCacheAdapter implements CacheAdapter{
     }
 
     support(): boolean {
-        return window.localStorage && Storage && window.localStorage instanceof Storage;
+        return false;
+        // return window && window.localStorage && Storage && window.localStorage instanceof Storage;
     }
 }

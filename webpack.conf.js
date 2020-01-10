@@ -4,7 +4,7 @@ const path = require('path')
 function generateConfig(name){
     var uglify = name.indexOf('min') > 1;
     var config = {
-        // entry 项目入口文件，通常是 入口 index.js
+        // entry 项目入口文件，通常是 入口 index.ts
         entry:'./index.ts', // 入口js ，可以写成 数组型式，也可使是对象，或者嵌套
         output:{ // 编译输出结果位置
             path:path.resolve(__dirname,'dist'), // 输出文件路径，这里（这个版本）需要使用绝对路径，所以用 path组件帮助一下
@@ -23,17 +23,10 @@ function generateConfig(name){
                         {
                             loader:'ts-loader',
                             options:{ // ts-loader 需要指定 tsconfig.json 的位置
-                                configFile:path.resolve(__dirname,'tsconfig.json')
+                                configFile:path.resolve(__dirname,'tsconfig.json'),
                             }
                         }
                     ],
-                    include:[
-                        // 这里写要处理的文件的路径，也需要用 path.resolve 转换成绝对
-                    ],
-                    exclude:[
-                        // 同上
-                    ],
-
                 }
             ]
         },
@@ -61,4 +54,4 @@ function generateConfig(name){
 // ['pcc'].forEach(function(key){
 //     config[key] = generateConfig(key);
 // })
-module.exports = generateConfig('pcc');
+module.exports = generateConfig('CacheController');

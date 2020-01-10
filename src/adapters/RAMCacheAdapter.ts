@@ -1,7 +1,11 @@
 import CacheAdapter from "./CacheAdapter";
 
-export default class RAMCacheAdapter implements CacheAdapter{
-    cache:{};
+export default class RAMCacheAdapter implements CacheAdapter {
+    constructor() {
+        this.cache = {};
+    }
+
+    cache: {};
 
     [name: string]: any;
 
@@ -14,8 +18,12 @@ export default class RAMCacheAdapter implements CacheAdapter{
     getCache(key: string): Promise<string | null> {
         let _this = this;
         // @ts-ignore
-        return new Promise(function getTheCache(resolve){
-            resolve(_this.cache[key])
+        return new Promise(function getTheCache(resolve, reject) {
+            let value = _this.cache[key];
+            if (value)
+                resolve(value)
+            else
+                reject("not existed")
         });
     }
 
@@ -36,7 +44,7 @@ export default class RAMCacheAdapter implements CacheAdapter{
     }
 
     setItem(key: string, value: string): void {
-        this.setCache(key,value);
+        this.setCache(key, value);
     }
 
     support(): boolean {
